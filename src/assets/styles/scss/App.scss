@@ -1,0 +1,95 @@
+/*
+----------------------------------------------------
+Common styles
+----------------------------------------------------
+*/
+ul{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+/*
+===================================================
+Common styles
+===================================================
+*/
+.App{
+
+}
+
+#nav-main {
+    position: fixed;
+    z-index: 99999999;
+    top: 0;
+    width: 100%;
+    padding: 8px 0;
+    background: #fff;
+    -webkit-transition: 300ms all cubic-bezier(.4,0,.2,1);
+    transition: 300ms all cubic-bezier(.4,0,.2,1);
+}
+
+#nav-main nav {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-flex: 1;
+    flex: 1;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+#nav-main .row-container {
+    width: 1440px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#nav-main nav>ul {
+    margin: 0;
+}
+#nav-main nav>ul {
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#nav-main nav>ul li {
+    position: relative;
+}
+
+#nav-main nav a.menu-item {
+    padding: 0 24px;
+    color: rgba(32,41,47,.6);
+    height: 80px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+#nav-main nav>ul li:hover>a {
+    color: #20292f;
+}
+
+// Add style in js dynamicaly
+#nav-main.et_fixed_nav {
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 4px 24px 0 rgba(103,151,255,.1), 0 12px 64px 0 rgba(103,151,255,.1);
+}
+
+.row-container {
+    width: 1120px;
+    max-width: 90%;
+    margin: auto;
+    position: relative;
+}
