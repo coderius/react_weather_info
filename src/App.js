@@ -1,23 +1,43 @@
 import React, { Component } from 'react'
 import './assets/styles/scss/App.scss';
-import MenuTop from './components/ui/menu-top/MenuTop'
-import $ from 'jquery';
+import {
+  Route, 
+  Switch, 
+  Redirect, 
+  BrowserRouter as Router,
+} from 'react-router-dom';
+import Layout from './components/HOC/Layout/Layout';
+import WeatherCommon from './components/Pages/WeatherCommon/WeatherCommon';
+import WeatherCity from './components/Pages/WeatherCity/WeatherCity';
+// import $ from 'jquery';
 // window.$ = window.jQuery=jquery;
 // import  './assets/js/nav.top.js';
-require('./assets/js/nav.top.js');
+// require('./assets/js/nav.top.js');
 
 class App extends Component {
 
   componentDidMount() {
-    $('#nav-main').fixedNav();
+
   }
 
   render() {
 
+    let routes = (
+      
+        <Switch>
+            <Route path="/" exact component={WeatherCommon} />
+            <Route path="/weather/city/:city" component={WeatherCity} />
+            <Redirect to="/" />
+        </Switch>
+        
+    )
+
     return (
-      <React.Fragment>
-        <MenuTop />
-      </React.Fragment>
+          <Router>
+              <Layout>
+                { routes }
+              </Layout>
+          </Router>
         )
       }
     }

@@ -7,6 +7,7 @@
 
 ///Core vars
 $Logo__slogan-color: color(cyan, cyan);
+$TopNav__link-color--active: color(red, red);
 
 /*
 ----------------------------------------------------
@@ -45,8 +46,12 @@ Common styles
 ===================================================
 */
 
-.App{
+.Layout{
+    padding-top:120px;
+}
 
+.Layout--scrolled{
+    
 }
 
 
@@ -106,6 +111,14 @@ Common styles
     flex-direction: column;
     -webkit-box-pack: center;
     justify-content: center;
+
+    &.menu-item--active{
+        color: $TopNav__link-color--active;
+    }
+}
+
+.menu-item--active{
+    color: $TopNav__link-color--active;
 }
 
 #nav-main nav>ul li:hover>a {

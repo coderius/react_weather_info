@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import logo from "../../../assets/img/svg/logo.svg";
+import { NavLink } from 'react-router-dom'
+import logo from "../../../../assets/img/svg/logo.svg";
 
 class MenuTop extends Component {
 
@@ -25,7 +26,7 @@ class MenuTop extends Component {
             elem.classList.remove('et_fixed_nav');
         }
         
-        console.log(window.scrollY, elem.scrollTop);
+        // console.log(window.scrollY, elem.scrollTop);
     };
 
     render() {
@@ -39,19 +40,13 @@ class MenuTop extends Component {
                     <nav>
                         <ul className="menu">
                         <li className="menu-wrapper">
-                            <a href="/" className="menu-item">
-                            Home
-                            </a>
+                            <NavLink to='/' exact={true} className="menu-item" activeClassName='menu-item--active'>In World</NavLink>
                         </li>
                         <li className="menu-wrapper">
-                            <a href="/" className="menu-item">
-                            All
-                            </a>
+                            <NavLink to='/weather/city/NewYork' exact={true} className="menu-item" activeClassName='menu-item--active'>In City</NavLink>
                         </li>
                         <li className="menu-wrapper">
-                            <a href="/" className="menu-item">
-                            History
-                            </a>
+                            <NavLink to='/weather/country/NewYork' className="menu-item" activeClassName='menu-item--active'>In Country</NavLink>
                         </li>
                         </ul>
                     </nav>
