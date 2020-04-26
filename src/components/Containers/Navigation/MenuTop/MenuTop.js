@@ -33,10 +33,12 @@ class MenuTop extends Component {
         return (
             <div ref={this.nav} id="nav-main" className="font-stack-Montserrat--regular text-upper">
                 <div className="row-container">
-                    <a id="logo" href="/">
+                    <NavLink to='/' exact={true} id="logo">
                         <img src={logo} alt="Weather Themes" />
                         <span className="logo__slogan">Weather Info</span>
-                    </a>
+                    </NavLink>
+                        
+                    
                     <nav>
                         <ul className="menu">
                         <li className="menu-wrapper">
