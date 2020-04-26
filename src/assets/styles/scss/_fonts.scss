@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&family=Open+Sans:400,400i,700,700i');
+
+$base-font-stack: (
+  //Monsterrat
+  //font: font-style font-variant font-weight font-size/line-height font-family;
+    Montserrat:
+    (
+        regular: (
+            font-family: (Montserrat,sans-serif),
+            font-style: normal,
+            font-weight: 700,
+            font-stretch: normal,
+            font-size: 0.75rem,
+            line-height: 2rem
+        )
+    ),
+);
+
+
+/// Mixin fonts.
+/// @param {Map} $marge || null. Rewrite items in first map.
+/// Usage:
+/// h1 {@include font(helvetica, bold, (font-size: 1rem));}
+///
+@mixin font(
+    $group,
+    $variant: regular,
+    $marge: null, 
+    $properties: font-family font-style font-weight font-stretch font-size line-height,
+    $font-stack: $base-font-stack
+) {
+    $font-properties: map-deep-get($font-stack, $group, $variant);
+    @if ($marge != null){
+        $font-properties: map-merge($font-properties, $marge);
+    }
+
+    @if $font-properties {
+        @each $property, $values in $font-properties {
+            @if contains($properties, $property) {
+                #{$property}: map-get($font-properties, $property);
+            }
+        }
+    }
+}

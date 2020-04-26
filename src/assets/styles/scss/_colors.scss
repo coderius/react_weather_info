@@ -1,0 +1,67 @@
+$deep-purple--darken-2: #512DA8;
+$cyan:#00BCD4;
+
+$base-color-stack:(
+    red: (
+        red:#F44336,
+        red-lighten-5:#FFEBEE,
+        red-lighten-4:#FFCDD2,
+        red-lighten-3:#EF9A9A,
+        red-lighten-2:#E57373,
+        red-lighten-1:#EF5350,
+        red-darken-1:#E53935,
+        red-darken-2:#D32F2F,
+        red-darken-3:#C62828,
+        red-darken-4:#B71C1C,
+        red-accent-1:#FF8A80,
+        red-accent-2:#FF5252,
+        red-accent-3:#FF1744,
+        red-accent-4:#D50000
+    ),
+    cyan: (
+        cyan:#00BCD4,
+    ),
+
+);
+
+/// Function color.
+/// @param {Map} $marge || null. Rewrite items in first map.
+/// Usage:
+/// color: {color(red, red-accent-3);}
+///
+@function color(
+    $group,
+    $variant,
+    $allowedGroups: red cyan,
+    $color-stack: $base-color-stack
+){
+    $color: map-deep-get($color-stack, $group, $variant);
+
+    @if $color {
+        
+        @if contains($allowedGroups, $group) {
+            @return $color;
+        }@else{
+            @error "Color group #{$group} not allowed by rule #{$allowedGroups}.";
+        }
+        
+    }@else{
+        @error "Color #{$variant} not faund in color stack #{$color-stack}.";
+    }
+};
+
+/// Mixin colorSelector.
+/// @param {Map} $marge || null. Rewrite items in first map.
+/// Usage:
+/// @include colorSelector(red, red-accent-3, color);
+///
+@mixin colorSelector(
+    $group,
+    $variant,
+    $selector,
+    $allowedGroups: red cyan,
+    $color-stack: $base-color-stack
+) {
+    @include color($group, $variant, $allowedGroup, $color-stack);
+};
+

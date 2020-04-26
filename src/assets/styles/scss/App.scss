@@ -1,8 +1,23 @@
+///Helpers
+@import 'helpers/helpers';
+//Core imports
+@import 'colors';
+@import 'fonts';
+
+
+///Core vars
+$Logo__slogan-color: color(cyan, cyan);
+
 /*
 ----------------------------------------------------
 Common styles
 ----------------------------------------------------
 */
+
+html{
+    font-size: 16px;
+}
+
 ul{
     list-style: none;
 }
@@ -11,14 +26,27 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+.font-stack-Montserrat--regular{
+    @include font(Montserrat, regular, (font-size: 1rem));
+    
+}
+
+.text-upper{
+    text-transform: uppercase;
+}
 /*
 ===================================================
 Common styles
 ===================================================
 */
+
 .App{
 
 }
+
+
+
 
 #nav-main {
     position: fixed;
@@ -92,4 +120,17 @@ Common styles
     max-width: 90%;
     margin: auto;
     position: relative;
+}
+
+#logo{
+    color: $Logo__slogan-color;
+
+    & > img{
+        width: 140px;
+        height: 40px;
+        margin-bottom: 1px;
+        -webkit-backface-visibility: hidden;
+        filter: invert(.5) sepia(1) saturate(5);
+    }
+    
 }
