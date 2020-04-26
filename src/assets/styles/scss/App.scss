@@ -18,6 +18,10 @@ html{
     font-size: 16px;
 }
 
+body{
+    height: 3000px;
+}
+
 ul{
     list-style: none;
 }
@@ -113,7 +117,21 @@ Common styles
     background: #fff;
     padding: 0;
     box-shadow: 0 4px 24px 0 rgba(103,151,255,.1), 0 12px 64px 0 rgba(103,151,255,.1);
+    font-size: 0.95rem;
+
+    & nav a.menu-item{
+        height: 65px;
+    }
+
+    #logo img{
+        width: 140px;
+        height: 30px;
+    }
 }
+
+
+//## Add style in js dynamicaly
+
 
 .row-container {
     width: 1120px;
@@ -124,6 +142,12 @@ Common styles
 
 #logo{
     color: $Logo__slogan-color;
+    display: flex;
+    flex-direction: column;
+
+    & > .logo__slogan{
+        margin:0 auto;
+    }
 
     & > img{
         width: 140px;
@@ -131,6 +155,7 @@ Common styles
         margin-bottom: 1px;
         -webkit-backface-visibility: hidden;
         filter: invert(.5) sepia(1) saturate(5);
+        transition: height .2s;
     }
     
 }
