@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MenuTop from '../../../components/Containers/Navigation/MenuTop/MenuTop'
+import MenuTop from '../../../components/Views/Navigation/MenuTop/MenuTop'
 // import $ from 'jquery';
 // window.$ = window.jQuery=jquery;
 // import  './assets/js/nav.top.js';
@@ -38,7 +38,7 @@ class Layout extends Component {
             <div ref={this.layout} className="Layout">
                 <MenuTop />
 
-                <main>
+                <main className="Main">
                     { this.props.children }
                 </main>
                 
