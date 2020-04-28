@@ -1,7 +1,7 @@
 ///WeatherList
 import React, { Component } from "react";
-import MainHeader from "../../Views/Headers/MainHeader/MainHeader";
-import MainWidgetBlock from "../../Views/Blocks/MainWidgetBlock/MainWidgetBlock";
+import MainHeader from "../../Containers/Headers/MainHeader/MainHeader";
+import MainWidgetBlock from "../../Containers/Blocks/MainWidgetBlock/MainWidgetBlock";
 
 class WeatherCommon extends Component {
 
