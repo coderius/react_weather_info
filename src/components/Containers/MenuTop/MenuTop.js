@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../../../assets/img/svg/logo.svg";
-import SwitcherNightDey from "../../UI/SwitcherNightDey";
+import logo from "../../../assets/img/svg/logo.svg";
+import SwitcherNightDey from "../SwitcherNightDey/SwitcherNightDey";
 
 class MenuTop extends Component {
   constructor(props) {

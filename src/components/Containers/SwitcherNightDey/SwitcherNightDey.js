@@ -1,6 +1,6 @@
 ///SwitcherNightDey
 import React, { Component } from "react";
-import Button from "../../Presentational/UI/Button"
+import Button from "../../UI/Button"
 import { connect } from "react-redux";
 import {
   toggleLayoutThemeAction

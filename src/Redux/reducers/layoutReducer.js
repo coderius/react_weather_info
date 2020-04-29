@@ -19,6 +19,7 @@ const layoutReducer = (state = initialState, action) => {
     }
   };
 
+  
 // const layoutReducer = (state = initialState, action) => {
 //     switch (action.type) {
 //       case TOGGLE_LAYOUT_THEME_ACTION:

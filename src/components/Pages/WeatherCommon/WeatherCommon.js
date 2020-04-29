@@ -1,7 +1,7 @@
 ///WeatherList
 import React, { Component } from "react";
 import MainHeader from "../../Containers/Headers/MainHeader/MainHeader";
-import MainWidgetBlock from "../../Containers/Blocks/MainWidgetBlock/MainWidgetBlock";
+import SeveralCitiesBlockContainer from "../../Containers/SeveralCitiesBlockContainer/SeveralCitiesBlockContainer";
 
 class WeatherCommon extends Component {
 
@@ -13,8 +13,8 @@ class WeatherCommon extends Component {
                 desc: "This is some html",
                 buttonText: "More info"
             },
-            MainWidgetBlock:{
-                data: "Some data",
+            SeveralCitiesBlockContainer:{
+                header: "Several Cities Block Container",
             }
         }
     }
@@ -24,7 +24,7 @@ class WeatherCommon extends Component {
             <>
                 <p>WeatherCommon</p>
                 <MainHeader title={this.state.Header.title} desc={this.state.Header.desc} buttonText={this.state.Header.buttonText} />
-                <MainWidgetBlock data={this.state.MainWidgetBlock.data} />
+                <SeveralCitiesBlockContainer header={this.state.SeveralCitiesBlockContainer.header} />
             </>
         );
     }

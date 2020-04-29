@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MenuTop from '../../../components/Containers/Navigation/MenuTop/MenuTop'
+import MenuTop from '../../Containers/MenuTop/MenuTop'
 // import $ from 'jquery';
 // window.$ = window.jQuery=jquery;
 // import  './assets/js/nav.top.js';
