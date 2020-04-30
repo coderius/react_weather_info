@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&family=Open+Sans:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&family=Open+Sans:400,400i,700,700i&family=Nanum+Gothic:wght@400;800');
+
+//https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900&display=swap
+
+$font-family-Montserrat: Montserrat,sans-serif;
 
 $base-font-stack: (
   //Monsterrat
@@ -9,6 +13,17 @@ $base-font-stack: (
             font-family: (Montserrat,sans-serif),
             font-style: normal,
             font-weight: 700,
+            font-stretch: normal,
+            font-size: 0.75rem,
+            line-height: 2rem
+        )
+    ),
+    NanumGothic:
+    (
+        regular: (
+            font-family: ('Nanum Gothic', sans-serif),
+            font-style: normal,
+            font-weight: 800,
             font-stretch: normal,
             font-size: 0.75rem,
             line-height: 2rem

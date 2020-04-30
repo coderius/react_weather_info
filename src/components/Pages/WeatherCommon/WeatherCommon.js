@@ -1,6 +1,6 @@
 ///WeatherList
 import React, { Component } from "react";
-import MainHeader from "../../Containers/MainHeader/MainHeader";
+import MainHeader from "../../UI/MainHeader/MainHeader";
 import SeveralCitiesBlockContainer from "../../Containers/SeveralCitiesBlockContainer/SeveralCitiesBlockContainer";
 
 class WeatherCommon extends Component {
@@ -9,12 +9,12 @@ class WeatherCommon extends Component {
         super(props);
         this.state = {
             Header: {
-                title: "What about WEATHER INFO ...",
+                title: "WEATHER INFO",
                 desc: "This is some html",
                 buttonText: "More info"
             },
             SeveralCitiesBlockContainer:{
-                header: "Several Cities Block Container",
+                blockHeader: "Several Cities Block Container",
             }
         }
     }
@@ -22,9 +22,14 @@ class WeatherCommon extends Component {
     render() {
         return (
             <>
-                <p>WeatherCommon</p>
-                <MainHeader title={this.state.Header.title} desc={this.state.Header.desc} buttonText={this.state.Header.buttonText} />
-                <SeveralCitiesBlockContainer header={this.state.SeveralCitiesBlockContainer.header} />
+                <MainHeader 
+                    title={this.state.Header.title} 
+                    desc={this.state.Header.desc} 
+                    buttonText={this.state.Header.buttonText} 
+                />
+                <SeveralCitiesBlockContainer 
+                    /* blockHeader={this.state.SeveralCitiesBlockContainer.blockHeader} */
+                />
             </>
         );
     }

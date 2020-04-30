@@ -21,18 +21,50 @@ $base-color-stack:(
     cyan: (
         cyan:#00BCD4,
     ),
+    purple: (
+        purple: #9C27B0,
+
+    ),
+    deep-purple: (
+        deep-purple-lighten-1:#7E57C2,
+        deep-purple-darken-1:#5E35B1,
+        deep-purple-lighten-5:#EDE7F6,
+
+    ),
+    orange: (
+        orange-darken-4:#E65100,
+
+    ),
+    amber: (
+        amber:#FFC107,
+
+    ),
+    blue-grey: (
+        blue-grey-darken-4:#263238,
+        blue-grey-lighten-5:#ECEFF1,
+
+    ),
 
 );
+
+///Buttons
+$btn-bg-color--primary: map-deep-get($base-color-stack, purple, purple);
+
+///Top nav
+
+
+$groupColors: red cyan deep-purple purple orange blue-grey amber;
 
 /// Function color.
 /// @param {Map} $marge || null. Rewrite items in first map.
 /// Usage:
 /// color: {color(red, red-accent-3);}
 ///
+
 @function color(
     $group,
     $variant,
-    $allowedGroups: red cyan,
+    $allowedGroups: $groupColors,
     $color-stack: $base-color-stack
 ){
     $color: map-deep-get($color-stack, $group, $variant);
