@@ -17,25 +17,25 @@ class SeveralCitiesBlockContainer extends Component {
 
   render() {
     const {list} = this.props.citiesData;
-    // if(this.props.citiesDataLoading == false)
     console.log("apiReduser",this.props.apiReduser);
+    
     return (
       <div className="several-cities-block">
         <h1>{this.props.header}</h1>
         <ul>
             {
-                this.props.citiesDataLoading === true
+                this.props.citiesDataIsLoaded
                     ?
-                    "Loading..."
-                    :
-                    
-                    // list.map((item, idx) => (
-                    //     <li key={idx}>
-                    //         {/* {item.name} */}
-                    //     </li>
-                    // ))
+                    list.map((item, idx) => (
+                        <li key={idx}>
+                            {item.name}
+                        </li>
+                    ))
                 
-                    "Ready!"
+                    // "Ready!"
+                    :
+                    "Loading..."
+                    
                     
             }
         </ul>
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
   return {
     apiReduser: state.apiReduser,
     citiesData: state.apiReduser.data,
-    citiesDataLoading: state.apiReduser.loading,
+    citiesDataIsLoaded: state.apiReduser.isLoaded,
     citiesDataError: state.apiReduser.error,
   };
 };

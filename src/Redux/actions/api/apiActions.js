@@ -4,8 +4,9 @@ import {
     CALL_SEVERAL_CITY_IDS_FAILURE 
     } from "../types";
 
-import axios from "axios";
-// import axiosConfig from "./axiosConfig"
+// import axios from "axios";
+import { axiosInstance } from './axiosInstance';
+import { openWeatherMapSecretKey } from './apiSecretKey';
 
 ///////////////////////////////////////////////
 // Call current weather data for several cities
@@ -25,7 +26,7 @@ export const fetch_data = ( cityIds ) => {
     const params = {
         id: cityIds,
         units: 'metric',
-        appid: 'be0f362c7e089a7de5487bbc1a31520f',
+        appid: openWeatherMapSecretKey,
 
     };
 
@@ -33,8 +34,8 @@ export const fetch_data = ( cityIds ) => {
 
     console.log('current state:', getState()); //debug
 
-    axios
-      .get('http://api.openweathermap.org/data/2.5/group?', {params: params})
+    axiosInstance
+      .get('/data/2.5/group?', {params: params})
       .then((res) => {
       // setTimeout(() => {
         dispatch(callSeveralCityIdsSuccess(res.data));

@@ -6,7 +6,7 @@ import {
     } from "../../actions/types";
 
   const initialState = {
-        loading: null,
+        isLoaded: false,
         data: [],
         error: null
     }
@@ -16,19 +16,19 @@ import {
         case CALL_SEVERAL_CITY_IDS_STARTED:
             return {
                 ...state,
-                loading: true
+                isLoaded: false
             };
             
         case CALL_SEVERAL_CITY_IDS_SUCCESS:
             return {
                 ...state,
-                loading: false,
+                isLoaded: true,
                 error: null,
                 data: action.payload
             };
             // console.log('df',state);
             // return Object.assign({}, state, {
-            //     loading: false,
+            //     isLoaded: false,
             //     error: null,
             //     data: action.payload
             //   });
@@ -36,7 +36,7 @@ import {
         case CALL_SEVERAL_CITY_IDS_FAILURE:
             return {
                 ...state,
-                loading: false,
+                isLoaded: false,
                 error: action.payload.error
             };
         default:
