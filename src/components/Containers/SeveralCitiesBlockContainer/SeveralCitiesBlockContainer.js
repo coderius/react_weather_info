@@ -49,15 +49,16 @@ class SeveralCitiesBlockContainer extends Component {
                   {this.props.citiesDataIsLoaded
                     ? list.map((item, idx) => (
                         <div className="col-sm text-centered" key={idx}>
-                          <a className="link-wrap" href="/">
+                          
                             {/* Card */}
                             <Card 
                               lead={item.name} 
                               sysCountry={item.sys.country} 
                               icon={item.weather[0].icon} 
+                              href={"/"}
                             />
                             {/* Card */}
-                          </a>
+                          
                         </div>
                       ))
                     : // "Ready!"

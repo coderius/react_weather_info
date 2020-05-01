@@ -3,8 +3,8 @@ import React from "react";
 const Card = (props) => {
     console.log(props.icon);
   return (
-    <div className="card blue-grey-darken-4">
-      <a className="link-wrap" href="/"></a>
+    <div className="card blue-grey-darken-4 link-wrap-box">
+      <a className="link-wrap" href={props.href}></a>
       <div className="card__header">
   <p className="card__lead">Weather for {props.lead},{props.sysCountry}</p>
       </div>
