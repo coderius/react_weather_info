@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import layoutReducer from "./layoutReducer";
-import apiReduser from "./api/apiReduser";
+import apiReduser from "./api/openweathermap/apiReduser";
 
 const rootReducer = combineReducers({
     layoutReducer,

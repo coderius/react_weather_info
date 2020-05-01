@@ -8,11 +8,11 @@ class MainHeader extends Component {
 
   render() {
     return (
-      <header className="main-header gallery-hero section">
-        <div className="row-container narrow">
-          <div className="row center-align-columns">
-            <div className="column-container column-7 retain-width-on-mobile">
-              <div className="column color-deep-purple-lighten-5">
+      <header className="main-header gallery-hero">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <div className="color-deep-purple-lighten-5">
                     <h1 className="headline-1">{this.props.title}</h1>
                     <h2 className="headline-2">
                         {this.props.desc}
@@ -27,10 +27,10 @@ class MainHeader extends Component {
                 </a>
               </div>
             </div>
-            <div className="column-container">
-              <div className="column">
+            <div className="col-sm">
+              <div className="row">
                 <a
-                  className="video-popup"
+                  className="video-popup col-sm"
                   href="https://www.youtube.com/watch?v=q9XI0Lo-SWE"
                 >
                   <div className="play-button-container">
@@ -41,6 +41,9 @@ class MainHeader extends Component {
                     </div>
                   </div>
                 </a>
+                <div className="col-sm align-self-end">
+                  <p className="toast toast--primary">How it works. Short video.</p>
+                </div>
               </div>
             </div>
           </div>

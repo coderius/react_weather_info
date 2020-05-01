@@ -110,9 +110,9 @@
 /// #Navigation top#
 
 
-
+/// Header
 .main-header {
-  padding-top: 120px;
+  padding-top: 10rem;
   background: linear-gradient(
       to bottom right,
       rgba(72, 72, 212, 0),
@@ -214,8 +214,7 @@
     }
 }
 
-
-/// Cards
+/// Links, Buttons
 .link-wrap-box{
     position: relative;
     z-index: 10;
@@ -230,14 +229,23 @@
     z-index: 11;
 }
 
+
+/// Cards
 .card{
     overflow: hidden;
-    transition: 300ms all cubic-bezier(.4,0,.2,1);
     @include font(Montserrat, regular, null, font-family font-style);
     display: inline-block;
     font-size: 1rem;
     font-weight: 900;
     line-height: 28px;
+    border-radius: 8px;
+    background-color: #fff;
+    /* padding: 32px; */
+    -webkit-transition: 300ms all cubic-bezier(.4,0,.2,1);
+    transition: 300ms all cubic-bezier(.4,0,.2,1);
+    margin-top: 24px;
+    box-shadow: 0 8px 60px 0 rgba(103,151,255,.11), 0 12px 90px 0 rgba(103,151,255,.11);
+
 
     &:hover{
         transform: scale(1.05);
@@ -270,26 +278,64 @@
     }
     &__degree{
         font-size: 2.5rem;
-        font-weight: 900;
+        font-weight: 700;
         line-height: 28px;
     }
     &__rising{
         font-size: .8rem;
-        font-weight: 400;
+        font-weight: 600;
         line-height: 28px;
     }
     &__means{
         font-size: 1rem;
         font-weight: 700;
         line-height: 1rem;
-        text-transform: capitalize;
-        
     }
-    &__wind{
+    &__data-row{
         font-size: .8rem;
         font-weight: 400;
         line-height: 1rem;
 
+    }
+}
+
+
+
+///Toast
+.toast{
+    @include font(Courgette, regular, null, font-family font-style);
+    display: inline-block;
+    position: relative;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 28px;
+    color: lighten(color(blue-grey, blue-grey-darken-4),30) !important;
+    // letter-spacing: 1px;
+    border-radius: 0 10px 10px 10px;
+    padding: 12px 38px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-self: flex-start;
+    border: none;
+    margin-bottom: 16px;
+    -webkit-transition: 300ms all cubic-bezier(.4,0,.2,1);
+    transition: 300ms all cubic-bezier(.4,0,.2,1);
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -5px;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 13px 0 0 13px;
+        border-color:  #fff transparent transparent;
+    }
+    &--primary{
+        background: -webkit-linear-gradient(330deg, #fff 0%, color(blue-grey, blue-grey-lighten-5) 100%);
+        background: linear-gradient(120deg, #fff 0%, color(blue-grey, blue-grey-lighten-5) 100%);
+        background-color: $btn-bg-color--primary;
+        box-shadow: 0 4px 24px 0 rgba(103,151,255,.7), 0 12px 64px 0 rgba(103,151,255,.6);
     }
 }
 

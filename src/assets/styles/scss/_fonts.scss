@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&family=Open+Sans:400,400i,700,700i&family=Nanum+Gothic:wght@400;800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&family=Open+Sans:400,400i,700,700i&family=Courgette&display=swap');
 
 //https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900&display=swap
 
@@ -18,12 +18,12 @@ $base-font-stack: (
             line-height: 2rem
         )
     ),
-    NanumGothic:
+    Courgette:
     (
         regular: (
-            font-family: ('Nanum Gothic', sans-serif),
+            font-family: ('Courgette', cursive),
             font-style: normal,
-            font-weight: 800,
+            font-weight: 400,
             font-stretch: normal,
             font-size: 0.75rem,
             line-height: 2rem

@@ -2,7 +2,7 @@ import {
     CALL_SEVERAL_CITY_IDS_STARTED,
     CALL_SEVERAL_CITY_IDS_SUCCESS,
     CALL_SEVERAL_CITY_IDS_FAILURE 
-    } from "../types";
+    } from "../../types";
 
 // import axios from "axios";
 import { axiosInstance } from './axiosInstance';
