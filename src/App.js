@@ -9,7 +9,8 @@ import {
 import Layout from "./components/HOC/Layout/Layout";
 import WeatherCommon from "./components/Pages/WeatherCommon/WeatherCommon";
 import WeatherCity from "./components/Pages/WeatherCity/WeatherCity";
-import {getCurrentIp} from "./helpers/IpHelper";
+import { connect } from "react-redux";
+import { fetchIp } from "./Redux/actions/api/geoip2/geoipAction";
 
 // import $ from 'jquery';
 // window.$ = window.jQuery=jquery;
@@ -18,17 +19,12 @@ import {getCurrentIp} from "./helpers/IpHelper";
 
 class App extends Component {
   componentDidMount() {
-    /**
-     * @see https://dev.maxmind.com/geoip/geoip2/javascript/
-     */
-    getCurrentIp("country")
-    .then((res) => {
-        console.log(res);
-    }).catch((error) => {
-      console.error(error);
-    });
-
-
+    //Load ip geo data user once
+    if(!this.props.userGeoIpIsLoaded){
+      this.props.fetchIp("city");
+    }
+      
+    
   }
 
   render() {
@@ -48,4 +44,26 @@ class App extends Component {
   }
 }
 
-export default App;
+
+/**
+ * Get async state geo ip for current user
+ * ----------------------------------------
+ * @see https://dev.maxmind.com/geoip/geoip2/javascript/
+ * 
+ */
+const mapStateToProps = (state) => {
+  return {
+    userGeoIp: state.geoipReduser.data,
+    userGeoIpIsLoaded: state.geoipReduser.isLoaded,
+    userGeoIpError: state.geoipReduser.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchIp: (endpoint) => dispatch(fetchIp(endpoint)), //endpoint: city, country or insights
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

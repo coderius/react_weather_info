@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MainHeader from "../../UI/MainHeader/MainHeader";
 import Map from "../../UI/Map/Map";
 import SeveralCitiesBlockContainer from "../../Containers/SeveralCitiesBlockContainer/SeveralCitiesBlockContainer";
+import { connect } from "react-redux";
 
 class WeatherCommon extends Component {
   constructor(props) {
@@ -23,8 +24,15 @@ class WeatherCommon extends Component {
 
   componentDidMount() {
     
+  
   }
 
+  getUserCity(){
+    if(this.props.userGeoIpIsLoaded){
+      return this.props.userGeoIp.city.names.en;
+    }
+    return false;
+  }
  
   render() {
     return (
@@ -34,6 +42,7 @@ class WeatherCommon extends Component {
           title={this.state.Header.title}
           desc={this.state.Header.desc}
           buttonText={this.state.Header.buttonText}
+          userCity={this.getUserCity()} 
         />
         <div className="bg-shape-1--r" style={{left: 20+'%'}}></div>
         <SeveralCitiesBlockContainer
@@ -144,4 +153,14 @@ class WeatherCommon extends Component {
   }
 }
 
-export default WeatherCommon;
+const mapStateToProps = (state) => {
+  return {
+    userGeoIp: state.geoipReduser.data,
+    userGeoIpIsLoaded: state.geoipReduser.isLoaded,
+    userGeoIpError: state.geoipReduser.error,
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(WeatherCommon);

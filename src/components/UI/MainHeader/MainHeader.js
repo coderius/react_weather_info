@@ -6,6 +6,10 @@ class MainHeader extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <header className="main-header gallery-hero">
@@ -16,6 +20,7 @@ class MainHeader extends Component {
                     <h1 className="headline-1">{this.props.title}</h1>
                     <h2 className="headline-2">
                         {this.props.desc}
+                        <p>{this.props.userCity}</p>
                     </h2>
                 
                 <a
