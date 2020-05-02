@@ -9,6 +9,7 @@ import {
 import Layout from "./components/HOC/Layout/Layout";
 import WeatherCommon from "./components/Pages/WeatherCommon/WeatherCommon";
 import WeatherCity from "./components/Pages/WeatherCity/WeatherCity";
+import {getCurrentIp} from "./helpers/IpHelper";
 
 // import $ from 'jquery';
 // window.$ = window.jQuery=jquery;
@@ -16,7 +17,19 @@ import WeatherCity from "./components/Pages/WeatherCity/WeatherCity";
 // require('./assets/js/nav.top.js');
 
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    /**
+     * @see https://dev.maxmind.com/geoip/geoip2/javascript/
+     */
+    getCurrentIp("country")
+    .then((res) => {
+        console.log(res);
+    }).catch((error) => {
+      console.error(error);
+    });
+
+
+  }
 
   render() {
     let routes = (

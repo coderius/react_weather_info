@@ -21,6 +21,11 @@ class WeatherCommon extends Component {
     };
   }
 
+  componentDidMount() {
+    
+  }
+
+ 
   render() {
     return (
       <>
