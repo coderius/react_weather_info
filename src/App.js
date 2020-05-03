@@ -31,7 +31,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/" exact component={WeatherCommon} />
-        <Route path="/weather/city/:city" component={WeatherCity} />
+        <Route path="/weather/city/:cityId" component={WeatherCity} />
         <Redirect to="/" />
       </Switch>
     );

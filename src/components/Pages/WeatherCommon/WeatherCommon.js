@@ -1,6 +1,6 @@
 ///WeatherList
 import React, { Component } from "react";
-import MainHeader from "../../UI/MainHeader/MainHeader";
+import MainHeader from "../../UI/Header/MainHeader";
 import Map from "../../UI/Map/Map";
 import SeveralCitiesBlockContainer from "../../Containers/SeveralCitiesBlockContainer/SeveralCitiesBlockContainer";
 import { connect } from "react-redux";
