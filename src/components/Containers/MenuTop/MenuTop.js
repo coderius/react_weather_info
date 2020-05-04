@@ -74,6 +74,15 @@ class MenuTop extends Component {
                 </NavLink>
               </li>
               <li className="menu-wrapper">
+                <NavLink
+                  to="/weather/search"
+                  className="menu-item"
+                  activeClassName="menu-item--active"
+                >
+                  Search Weather
+                </NavLink>
+              </li>
+              <li className="menu-wrapper">
                 <SwitcherNightDey />
               </li>
             </ul>

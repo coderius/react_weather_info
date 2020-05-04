@@ -2,7 +2,10 @@
 import { 
     CALL_SEVERAL_CITY_IDS_STARTED,
     CALL_SEVERAL_CITY_IDS_SUCCESS,
-    CALL_SEVERAL_CITY_IDS_FAILURE 
+    CALL_SEVERAL_CITY_IDS_FAILURE,
+    CALL_ONE_CITY_STARTED,
+    CALL_ONE_CITY_SUCCESS,
+    CALL_ONE_CITY_FAILURE 
     } from "../../../actions/types";
 
   const initialState = {
@@ -11,7 +14,7 @@ import {
         error: null
     }
   
-  const apiReduser = (state = initialState, action) => {
+  export const apiReduser = (state = initialState, action) => {
       switch (action.type) {
         case CALL_SEVERAL_CITY_IDS_STARTED:
             return {
@@ -44,5 +47,37 @@ import {
       }
     };
 
-  
-    export default  apiReduser;
+  /**
+   * Hendler current weather for one location
+   * @see https://openweathermap.org/current#severalid
+   * 
+   * 
+   * @param {*} state 
+   * @param {*} action 
+   */
+    export const apiCurWeatherOneCityReduser = (state = initialState, action) => {
+        switch (action.type) {
+          case CALL_ONE_CITY_STARTED:
+              return {
+                  ...state,
+                  isLoaded: false
+              };
+              
+          case CALL_ONE_CITY_SUCCESS:
+              return {
+                  ...state,
+                  isLoaded: true,
+                  error: null,
+                  data: action.payload
+              };
+             
+          case CALL_ONE_CITY_FAILURE:
+              return {
+                  ...state,
+                  isLoaded: false,
+                  error: action.payload.error
+              };
+          default:
+            return state;
+        }
+      };  

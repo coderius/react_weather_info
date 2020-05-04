@@ -50,6 +50,22 @@ a {
     max-width: 100%;
     height: auto;
 }
+
+.Co-flex-container-col-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;/*NEW*/
+}
+
+.Co-text-center{
+    text-align: center;
+}
+
+.Co-w24{
+    width: 24rem;
+}
+
 /*
 ===================================================
 Common styles

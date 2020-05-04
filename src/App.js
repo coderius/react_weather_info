@@ -9,6 +9,7 @@ import {
 import Layout from "./components/HOC/Layout/Layout";
 import WeatherCommon from "./components/Pages/WeatherCommon/WeatherCommon";
 import WeatherCity from "./components/Pages/WeatherCity/WeatherCity";
+import PageSearchWeather from "./components/Pages/PageSearchWeather/PageSearchWeather";
 import { connect } from "react-redux";
 import { fetchIp } from "./Redux/actions/api/geoip2/geoipAction";
 
@@ -32,6 +33,7 @@ class App extends Component {
       <Switch>
         <Route path="/" exact component={WeatherCommon} />
         <Route path="/weather/city/:cityId" component={WeatherCity} />
+        <Route path="/weather/search" component={PageSearchWeather} />
         <Redirect to="/" />
       </Switch>
     );
