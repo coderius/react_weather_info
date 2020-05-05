@@ -28,7 +28,7 @@ class WeatherCommon extends Component {
   }
 
   getUserCity(){
-    if(this.props.userGeoIpIsLoaded){
+    if(this.props.userGeoIpIsLoading){
       return this.props.userGeoIp.city.names.en;
     }
     return false;
@@ -156,7 +156,7 @@ class WeatherCommon extends Component {
 const mapStateToProps = (state) => {
   return {
     userGeoIp: state.geoipReduser.data,
-    userGeoIpIsLoaded: state.geoipReduser.isLoaded,
+    userGeoIpIsLoading: state.geoipReduser.loading,
     userGeoIpError: state.geoipReduser.error,
   };
 };

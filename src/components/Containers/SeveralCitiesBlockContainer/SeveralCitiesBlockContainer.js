@@ -79,7 +79,7 @@ class SeveralCitiesBlockContainer extends Component {
                 </div>
                 <div className="col-sm-12">
                   <div className="row">
-                  {this.props.citiesDataIsLoaded
+                  {!this.props.citiesDataLoading && this.props.citiesDataIsLoaded
                     ? list.map((item, idx) => (
                         <div className="col-md-4 col-sm-12 text-centered" key={idx}>
                             
@@ -122,6 +122,7 @@ const mapStateToProps = (state) => {
   return {
     apiReduser: state.apiReduser,
     citiesData: state.apiReduser.data,
+    citiesDataLoading: state.apiReduser.loading,
     citiesDataIsLoaded: state.apiReduser.isLoaded,
     citiesDataError: state.apiReduser.error,
   };

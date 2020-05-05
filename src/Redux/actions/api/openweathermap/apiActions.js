@@ -4,12 +4,16 @@ import {
     CALL_SEVERAL_CITY_IDS_FAILURE,
     CALL_ONE_CITY_STARTED,
     CALL_ONE_CITY_SUCCESS,
-    CALL_ONE_CITY_FAILURE 
+    CALL_ONE_CITY_FAILURE,
+    FIND_CITIES_CUR_WEATHER_STARTED,
+    FIND_CITIES_CUR_WEATHER_SUCCESS,
+    FIND_CITIES_CUR_WEATHER_FAILURE,
+    FIND_CITIES_CUR_WEATHER_RESET
     } from "../../types";
 
 // import axios from "axios";
-import { axiosInstance } from './axiosInstance';
-import { openWeatherMapSecretKey } from './apiSecretKey';
+import { AxiosConf, axiosInstance } from './axiosInstance';
+import { openWeatherMapSecretKey, openWeatherMapForSearchSecretKey } from './apiSecretKey';
 
 ///////////////////////////////////////////////
 // Call current weather data for several cities
@@ -89,7 +93,7 @@ const callSeveralCityIdsSuccess = data => ({
 export const fetchCurWeatherOneLocation = ( query ) => {
   return (dispatch, getState) => {
 
-    if(!query) throw new Error('ID IS REQUIRED!');
+    if(!query) throw new Error('Query IS REQUIRED!');
 
     const params = {
       appid: openWeatherMapSecretKey,
@@ -133,4 +137,73 @@ const callOneCitySuccess = data => ({
   });
 ////////////////////////////////////////////////
 /// Call current weather data for one location
+////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////
+// Find many cities and current weather
+///////////////////////////////////////////////
+/**
+ * https://openweathermap.org/data/2.5/find?q=london&type=like&sort=population&cnt=30&appid={your api key}
+ * 
+ * @param {string} city name || city id || coords
+ * @return {Promise}
+ * @see https://openweathermap.org/current#one
+ */
+
+
+export const findAllPlacesCurWeather = ( query ) => {
+  return (dispatch, getState) => {
+
+    if(!query) throw new Error('ID IS REQUIRED!');
+
+    const params = {
+      appid: openWeatherMapForSearchSecretKey,
+
+  };
+
+    dispatch(findCitiesCurWeatherStarted());
+
+    console.log('current state:', getState()); //debug
+
+    axiosInstance.defaults.baseURL = 'https://openweathermap.org';
+
+    axiosInstance
+      .get('/data/2.5/find?'+query, {params: params})
+      .then((res) => {
+      // setTimeout(() => {
+        dispatch(findCitiesCurWeatherSuccess(res.data));
+      // }, 2500);
+      })
+      .catch((err) => {
+        dispatch(findCitiesCurWeatherFailure(err.message));
+      });
+  };
+};
+
+const findCitiesCurWeatherSuccess = data => ({
+    type: FIND_CITIES_CUR_WEATHER_SUCCESS,
+    payload: {
+      ...data
+    }
+    // payload: data.data.children.map(child => child.data),
+  });
+  
+  const findCitiesCurWeatherStarted = () => ({
+    type: FIND_CITIES_CUR_WEATHER_STARTED
+  });
+  
+  const findCitiesCurWeatherFailure = error => ({
+    type: FIND_CITIES_CUR_WEATHER_FAILURE,
+    payload: {
+      error
+    }
+  });
+
+  export const findCitiesCurWeatherReset = () => ({
+    type: FIND_CITIES_CUR_WEATHER_RESET
+  });
+////////////////////////////////////////////////
+///  Find many cities and current weather
 ////////////////////////////////////////////////

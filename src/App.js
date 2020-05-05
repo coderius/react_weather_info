@@ -20,10 +20,9 @@ import { fetchIp } from "./Redux/actions/api/geoip2/geoipAction";
 
 class App extends Component {
   componentDidMount() {
-    //Load ip geo data user once
-    if(!this.props.userGeoIpIsLoaded){
-      this.props.fetchIp("city");
-    }
+    //Load ip geo data user
+    this.props.fetchIp("city");
+    
       
     
   }
@@ -56,7 +55,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     userGeoIp: state.geoipReduser.data,
-    userGeoIpIsLoaded: state.geoipReduser.isLoaded,
+    userGeoIpIsLoading: state.geoipReduser.loading,
     userGeoIpError: state.geoipReduser.error,
   };
 };
