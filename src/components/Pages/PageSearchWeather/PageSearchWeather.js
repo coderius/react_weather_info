@@ -109,11 +109,23 @@ class PageSearchWeather extends Component {
                           className="item"
                           key={idx}
                         >
-                          <i className="large github middle aligned icon"></i>
+                          
+                          <img
+                            src={"//openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/" + item.weather[0].icon + ".png"}
+                            alt="Weather in London, GB"
+                            className="ui bottom aligned tiny image"
+                          />
                           <div className="content">
-                            <a className="header">{item.name}, {item.sys.country}</a>
+                            <h3 className="ui header">
+                              <a>{item.name}</a>, {item.sys.country}&nbsp;&nbsp;
+                              <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} />
+                            </h3>
+                            
                             <div className="description">
                               Updated 10 mins ago
+                            </div>
+                            <div className="description">
+                              Coords
                             </div>
                           </div>
                           
