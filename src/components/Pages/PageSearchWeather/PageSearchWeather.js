@@ -6,6 +6,8 @@ import {
   findAllPlacesCurWeather,
   findCitiesCurWeatherReset,
 } from "../../../Redux/actions/api/openweathermap/apiActions";
+import { NavLink } from "react-router-dom";
+
 
 class PageSearchWeather extends Component {
   static defaultProps = {
@@ -125,7 +127,7 @@ class PageSearchWeather extends Component {
                               Updated 10 mins ago
                             </div>
                             <div className="description">
-                              Coords
+                              <strong>Geo coords</strong> - <span className="orange">(lat: <em>{item.coord.lat}</em>| lon: <em>{item.coord.lon}</em>)</span>
                             </div>
                           </div>
                           
