@@ -156,10 +156,16 @@ const callOneCitySuccess = data => ({
 export const findAllPlacesCurWeather = ( query ) => {
   return (dispatch, getState) => {
 
-    if(!query) throw new Error('ID IS REQUIRED!');
+    if(!query) throw new Error('QUERY IS REQUIRED!');
 
+    //q=London&units=metric&type=like&sort=population&cnt=30
     const params = {
-      appid: openWeatherMapForSearchSecretKey,
+      q: query,
+      units: 'metric',
+      type: 'like',
+      sort: 'population',
+      cnt: 30,
+      appid: openWeatherMapSecretKey,
 
   };
 
@@ -167,10 +173,10 @@ export const findAllPlacesCurWeather = ( query ) => {
 
     console.log('current state:', getState()); //debug
 
-    axiosInstance.defaults.baseURL = 'https://openweathermap.org';
+    // axiosInstance.defaults.baseURL = 'https://api.openweathermap.org';
 
     axiosInstance
-      .get('/data/2.5/find?'+query, {params: params})
+      .get('/data/2.5/find?', {params: params})
       .then((res) => {
       // setTimeout(() => {
         dispatch(findCitiesCurWeatherSuccess(res.data));

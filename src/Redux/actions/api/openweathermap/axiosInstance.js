@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const AxiosConf = {
-  baseURL:'http://api.openweathermap.org'
+  baseURL:'https://api.openweathermap.org'
 }
 
 export const axiosInstance = axios.create({

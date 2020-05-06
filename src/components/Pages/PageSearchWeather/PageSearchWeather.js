@@ -1,5 +1,6 @@
 ///PageSearchWeather.js
 import React, { Component } from "react";
+import moment from 'moment';
 import SearchHeader from "../../UI/Header/SearchHeader";
 import { connect } from "react-redux";
 import {
@@ -53,11 +54,49 @@ class PageSearchWeather extends Component {
         colorFind: true,
       },
       () => {
-        let query = `q=${this.state.valueSearched}&type=like&sort=population&cnt=30`;
+        let query = this.state.valueSearched;
         this.props.findAllPlacesCurWeather(query);
         console.log("query", query);
       }
     );
+  }
+
+  transformDate(value) {
+    var time = moment(value*1000).utc();
+    return moment(time, "YYYYMMDD").fromNow();
+  }
+
+  colorFromTemperature(temperature) {
+    let t = this.camputeRounded(temperature, 0);
+    switch(true){
+      case (t < 1):
+        return 'blue';
+      case (t < 10):
+        return 'teal';
+        
+      case (t < 15):
+        return 'green';
+
+      case (t < 22):
+        return 'olive'; 
+
+      case (t < 30):
+        return 'yellow';
+
+      case (t < 40):
+        return 'orange';
+
+      case (t < 100):
+          return 'red';
+    
+      default:
+        return 'pink';
+          
+    }
+  }
+
+  camputeRounded = function(number, level = 1){
+    return +number.toFixed(level);
   }
 
   render() {
@@ -120,11 +159,25 @@ class PageSearchWeather extends Component {
                           <div className="content">
                             <h3 className="ui header">
                               <a>{item.name}</a>, {item.sys.country}&nbsp;&nbsp;
-                              <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} />
+                              {/* flag by https://semantic-ui.com/elements/flag.html*/}
+                              <i className= {item.sys.country.toLowerCase() + " flag"}></i>
+                              {/* <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} /> */}
                             </h3>
                             
                             <div className="description">
-                              Updated 10 mins ago
+                              <strong>Temperature </strong>
+                              <span className={"ui " + this.colorFromTemperature(item.main.temp) + " label tiny circular"}>{this.camputeRounded(item.main.temp, 0)} °C</span> 
+                              <span className=""> | <strong>Min t:</strong> {item.main.temp_min} °C</span>
+                              <span className=""> | <strong>Max t:</strong> {item.main.temp_max} °C</span>
+                              <span className=""> | <strong>°t feels like:</strong> {this.camputeRounded(item.main.feels_like)} °C</span>
+                            </div>
+                            <div className="description">
+                              <span className=""><strong>Wind speed:</strong> {item.wind.speed} m/s</span>
+                              <span className=""> | <strong>Weather:</strong> {item.weather[0].description}</span>&nbsp;&nbsp;
+                              <span className="ui mini label olive basic">
+                                <i className="clock outline icon"></i>
+                                Updated at:{this.transformDate(item.dt)}
+                              </span>
                             </div>
                             <div className="description">
                               <strong>Geo coords</strong> - <span className="orange">(lat: <em>{item.coord.lat}</em>| lon: <em>{item.coord.lon}</em>)</span>
