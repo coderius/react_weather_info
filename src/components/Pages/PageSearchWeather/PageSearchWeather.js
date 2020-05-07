@@ -56,7 +56,7 @@ class PageSearchWeather extends Component {
       () => {
         let query = this.state.valueSearched;
         this.props.findAllPlacesCurWeather(query);
-        console.log("query", query);
+        // console.log("query", query);
       }
     );
   }

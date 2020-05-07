@@ -9,8 +9,10 @@ class SearchHeader extends Component {
   constructor(props) {
     super(props);
     this.input = React.createRef();
+    this.searchButton = React.createRef();
     this.onChange = this.onChange.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.onEnterSearch = this.onEnterSearch.bind(this);
   }
 
   componentDidMount() {}
@@ -23,6 +25,14 @@ class SearchHeader extends Component {
     event.preventDefault();
     let value = this.input.current.value;
     this.props.handleSearch(event, value);
+  }
+
+  onEnterSearch(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      // console.log(this.searchButton);
+      this.searchButton.current.click();//trigger click by ref
+    }
   }
 
   render() {
@@ -41,6 +51,7 @@ class SearchHeader extends Component {
                 <div className="ui icon input">
                   <input
                     onChange={ this.onChange }
+                    onKeyUp={ this.onEnterSearch }
                     ref={this.input}
                     className="prompt Co-w24"
                     type="text"
@@ -48,6 +59,7 @@ class SearchHeader extends Component {
                     maxLength="50"
                   />
                   <i 
+                  ref={this.searchButton}
                   onClick={ this.onSearch }
                   className="circular search link icon">
                   </i>
