@@ -30,12 +30,12 @@ class CityHeader extends Component {
               <p className="toast toast--primary">{this.props.searchToast}</p>
               <div className="ui loading search">
                 <div className="ui icon input">
-                  <input
-                    className="prompt"
-                    type="text"
-                    placeholder="Search..."
-                  />
-                  <i className="circular search link icon"></i>
+                  <NavLink
+                    to="/weather/search"
+                    className="button button--primary"
+                  >
+                    Find Weather
+                  </NavLink>
                 </div>
                 <div className="results"></div>
               </div>

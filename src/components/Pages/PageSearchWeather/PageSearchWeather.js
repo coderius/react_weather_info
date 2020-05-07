@@ -104,7 +104,7 @@ class PageSearchWeather extends Component {
   render() {
 
     const list = this.props.findedCitiesCurWData.list;
-
+    // console.log(list ? this.props.findedCitiesCurWData.list[0].coord.lat : "not load");
     return (
       <>
         <SearchHeader

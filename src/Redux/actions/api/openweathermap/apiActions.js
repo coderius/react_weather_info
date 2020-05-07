@@ -96,6 +96,7 @@ export const fetchCurWeatherOneLocation = ( query ) => {
     if(!query) throw new Error('Query IS REQUIRED!');
 
     const params = {
+      ...query,//merge object params
       appid: openWeatherMapSecretKey,
 
   };
@@ -105,7 +106,7 @@ export const fetchCurWeatherOneLocation = ( query ) => {
     console.log('current state:', getState()); //debug
 
     axiosInstance
-      .get('/data/2.5/weather?'+query, {params: params})
+      .get('/data/2.5/weather', {params: params})
       .then((res) => {
       // setTimeout(() => {
         dispatch(callOneCitySuccess(res.data));
@@ -213,3 +214,5 @@ const findCitiesCurWeatherSuccess = data => ({
 ////////////////////////////////////////////////
 ///  Find many cities and current weather
 ////////////////////////////////////////////////
+
+
