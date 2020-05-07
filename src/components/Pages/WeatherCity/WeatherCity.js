@@ -5,6 +5,7 @@ import CityHeader from "../../UI/Header/CityHeader";
 class WeatherCity extends Component {
 
     render() {
+        console.log(this.props.match.params);
         return (
             <>
                 <CityHeader
@@ -13,7 +14,7 @@ class WeatherCity extends Component {
                     userCity="Kharkiv"
                     
                 />
-                <p>WeatherCity {this.props.match.params.city}</p>
+                <p>WeatherCity {this.props.match.params.cityName}</p>
             </>
         );
     }

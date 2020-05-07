@@ -54,17 +54,17 @@ class MenuTop extends Component {
                   In World
                 </NavLink>
               </li>
-              <li className="menu-wrapper">
+              {/* <li className="menu-wrapper">
                 <NavLink
-                  to="/weather/city/NewYork"
+                  to="/weather/city/"
                   exact={true}
                   className="menu-item"
                   activeClassName="menu-item--active"
                 >
                   In City
                 </NavLink>
-              </li>
-              <li className="menu-wrapper">
+              </li> */}
+              {/* <li className="menu-wrapper">
                 <NavLink
                   to="/weather/country/NewYork"
                   className="menu-item"
@@ -72,7 +72,7 @@ class MenuTop extends Component {
                 >
                   In Country
                 </NavLink>
-              </li>
+              </li> */}
               <li className="menu-wrapper">
                 <NavLink
                   to="/weather/search"

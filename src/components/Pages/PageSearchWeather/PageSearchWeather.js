@@ -153,15 +153,41 @@ class PageSearchWeather extends Component {
                           
                           <img
                             src={"//openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/" + item.weather[0].icon + ".png"}
-                            alt="Weather in London, GB"
+                            alt={`Weather in ${item.name}, ${item.sys.country}`}
                             className="ui bottom aligned tiny image"
                           />
                           <div className="content">
                             <h3 className="ui header">
-                              <a>{item.name}</a>, {item.sys.country}&nbsp;&nbsp;
+                              {/* Link to city info */}
+                              <NavLink
+                                to={`/weather/country/${item.sys.country}/city/${item.name}/city-id/${item.id}`}
+                                exact={true}
+                                className=""
+                              >
+                                {item.name}
+                              </NavLink>,
+                              &nbsp;
+
+                              {/* Country name */}
+                              <NavLink
+                                to={`/weather/country/${item.sys.country}`}
+                                exact={true}
+                                className=""
+                              >
+                                {item.sys.country}
+                              </NavLink>
+                                &nbsp;
+
                               {/* flag by https://semantic-ui.com/elements/flag.html*/}
-                              <i className= {item.sys.country.toLowerCase() + " flag"}></i>
-                              {/* <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} /> */}
+                              <NavLink
+                                to={`/weather/country/${item.sys.country}`}
+                                exact={true}
+                                className=""
+                              >
+                                <i className= {item.sys.country.toLowerCase() + " flag"}></i>
+                                {/* <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} /> */}
+                              </NavLink>
+                              
                             </h3>
                             
                             <div className="description">
@@ -172,8 +198,8 @@ class PageSearchWeather extends Component {
                               <span className=""> | <strong>°t feels like:</strong> {this.camputeRounded(item.main.feels_like)} °C</span>
                             </div>
                             <div className="description">
-                              <span className=""><strong>Wind speed:</strong> {item.wind.speed} m/s</span>
-                              <span className=""> | <strong>Weather:</strong> {item.weather[0].description}</span>&nbsp;&nbsp;
+                            <span className=""> | <strong>Weather:</strong> {item.weather[0].description}</span>
+                              <span className=""><strong>Wind speed:</strong> {item.wind.speed} m/s</span>&nbsp;&nbsp;
                               <span className="ui mini label olive basic">
                                 <i className="clock outline icon"></i>
                                 Updated at:{this.transformDate(item.dt)}
