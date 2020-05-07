@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import moment from 'moment';
 import SearchHeader from "../../UI/Header/SearchHeader";
+import List from "../../UI/ListContent/List";
+import ListItem from "../../UI/ListContent/ListItem";
 import { connect } from "react-redux";
 import {
   findAllPlacesCurWeather,
@@ -143,77 +145,32 @@ class PageSearchWeather extends Component {
                 this.props.findedCitiesCurWIsLoaded ? (
                   this.props.findedCitiesCurWData.count > 0 ? (
                     //Result
-                    
-                      <div className="ui relaxed divided list">
+                    //List
+                      <List 
+                        classes="ui relaxed divided list"
+                      >
+                      
                       {list.map((item, idx) => (
-                        <div
-                          className="item"
+                        <ListItem 
                           key={idx}
-                        >
-                          
-                          <img
-                            src={"//openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/" + item.weather[0].icon + ".png"}
-                            alt={`Weather in ${item.name}, ${item.sys.country}`}
-                            className="ui bottom aligned tiny image"
-                          />
-                          <div className="content">
-                            <h3 className="ui header">
-                              {/* Link to city info */}
-                              <NavLink
-                                to={`/weather/country/${item.sys.country}/city/${item.name}/city-id/${item.id}`}
-                                exact={true}
-                                className=""
-                              >
-                                {item.name}
-                              </NavLink>,
-                              &nbsp;
-
-                              {/* Country name */}
-                              <NavLink
-                                to={`/weather/country/${item.sys.country}`}
-                                exact={true}
-                                className=""
-                              >
-                                {item.sys.country}
-                              </NavLink>
-                                &nbsp;
-
-                              {/* flag by https://semantic-ui.com/elements/flag.html*/}
-                              <NavLink
-                                to={`/weather/country/${item.sys.country}`}
-                                exact={true}
-                                className=""
-                              >
-                                <i className= {item.sys.country.toLowerCase() + " flag"}></i>
-                                {/* <img className="ui aligned mini image Co-w1_5 Co-v-align-base" src={"http://openweathermap.org/images/flags/" + item.sys.country.toLowerCase() + ".png"} /> */}
-                              </NavLink>
-                              
-                            </h3>
-                            
-                            <div className="description">
-                              <strong>Temperature </strong>
-                              <span className={"ui " + this.colorFromTemperature(item.main.temp) + " label tiny circular"}>{this.camputeRounded(item.main.temp, 0)} °C</span> 
-                              <span className=""> | <strong>Min t:</strong> {item.main.temp_min} °C</span>
-                              <span className=""> | <strong>Max t:</strong> {item.main.temp_max} °C</span>
-                              <span className=""> | <strong>°t feels like:</strong> {this.camputeRounded(item.main.feels_like)} °C</span>
-                            </div>
-                            <div className="description">
-                            <span className=""> | <strong>Weather:</strong> {item.weather[0].description}</span>
-                              <span className=""><strong>Wind speed:</strong> {item.wind.speed} m/s</span>&nbsp;&nbsp;
-                              <span className="ui mini label olive basic">
-                                <i className="clock outline icon"></i>
-                                Updated at:{this.transformDate(item.dt)}
-                              </span>
-                            </div>
-                            <div className="description">
-                              <strong>Geo coords</strong> - <span className="orange">(lat: <em>{item.coord.lat}</em>| lon: <em>{item.coord.lon}</em>)</span>
-                            </div>
-                          </div>
-                          
-                        </div>
+                          id={item.id}
+                          iconWeather={item.weather[0].icon}
+                          itemName={item.name}
+                          sysCountry={item.sys.country}
+                          colorTemperature={this.colorFromTemperature(item.main.temp)}
+                          temperatureMain={this.camputeRounded(item.main.temp, 0)}
+                          temperatureMin={item.main.temp_min}
+                          temperatureMax={item.main.temp_max}
+                          temperatureFeels={this.camputeRounded(item.main.feels_like)}
+                          weatherDescription={item.weather[0].description}
+                          windSpeed={item.wind.speed}
+                          dateUpdate={this.transformDate(item.dt)}
+                          coordsLat={item.coord.lat}
+                          coordsLon={item.coord.lon}
+                        />
                       ))}
-                      </div>
-                    
+                      
+                      </List>  
                   ) : (
                     //Not found
                     <p className="col-sm">Not found...</p>
