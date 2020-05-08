@@ -18,6 +18,12 @@ import {
         data: [],
         error: null
     }
+    const initialStateT = {
+        isLoaded: false,
+        loading: false,
+        data: [],
+        error: null
+    }
   
   export const apiReduser = (state = initialState, action) => {
       switch (action.type) {
@@ -63,7 +69,7 @@ import {
    * @param {*} state 
    * @param {*} action 
    */
-    export const apiCurWeatherOneCityReduser = (state = initialState, action) => {
+    export const apiCurWeatherOneCityReduser = (state = initialStateT, action) => {
         switch (action.type) {
           case CALL_ONE_CITY_STARTED:
               return {

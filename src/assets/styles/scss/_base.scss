@@ -46,6 +46,12 @@ a {
     text-transform: lowercase;
 }
 
+.Co-first-letter-upper{
+    &::first-letter {
+        text-transform: uppercase;
+      }
+}
+
 .responsive-img{
     max-width: 100%;
     height: auto;
@@ -166,6 +172,11 @@ $headline-koef: 0.3;
 
 .orange-darken-4{
     color: color(orange, orange-darken-4);
+}
+
+//Font styling
+.Co-fw--900{
+    font-weight: 900;
 }
 
 // Bg
