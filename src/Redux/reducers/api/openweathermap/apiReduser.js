@@ -9,7 +9,10 @@ import {
     FIND_CITIES_CUR_WEATHER_STARTED,
     FIND_CITIES_CUR_WEATHER_SUCCESS,
     FIND_CITIES_CUR_WEATHER_FAILURE,
-    FIND_CITIES_CUR_WEATHER_RESET
+    FIND_CITIES_CUR_WEATHER_RESET,
+    CALL_ONE_LOCATION_FORECAST_STARTED,
+    CALL_ONE_LOCATION_FORECAST_SUCCESS,
+    CALL_ONE_LOCATION_FORECAST_FAILURE,
     } from "../../../actions/types";
 
   const initialState = {
@@ -18,12 +21,7 @@ import {
         data: [],
         error: null
     }
-    const initialStateT = {
-        isLoaded: false,
-        loading: false,
-        data: [],
-        error: null
-    }
+   
   
   export const apiReduser = (state = initialState, action) => {
       switch (action.type) {
@@ -69,7 +67,7 @@ import {
    * @param {*} state 
    * @param {*} action 
    */
-    export const apiCurWeatherOneCityReduser = (state = initialStateT, action) => {
+    export const apiCurWeatherOneCityReduser = (state = initialState, action) => {
         switch (action.type) {
           case CALL_ONE_CITY_STARTED:
               return {
@@ -139,6 +137,44 @@ import {
               isLoaded: false,
               data: [],
           };   
+      default:
+        return state;
+    }
+  };  
+
+    /**
+   * Hendler forecast weather for one location
+   * @see https://openweathermap.org/forecast5#cityid5
+   * 
+   * @param {*} state 
+   * @param {*} action 
+   */
+  export const hendlerForecastOneLocationReduser = (state = initialState, action) => {
+    switch (action.type) {
+      case CALL_ONE_LOCATION_FORECAST_STARTED:
+          return {
+              ...state,
+              loading: true,
+              isLoaded: false
+          };
+          
+      case CALL_ONE_LOCATION_FORECAST_SUCCESS:
+          return {
+              ...state,
+              loading: false,
+              isLoaded: true,
+              error: null,
+              data: action.payload
+          };
+         
+      case CALL_ONE_LOCATION_FORECAST_FAILURE:
+          return {
+              ...state,
+              loading: false,
+              isLoaded: false,
+              error: action.payload.error
+          };
+
       default:
         return state;
     }

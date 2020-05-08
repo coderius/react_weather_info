@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import CityHeader from "../../UI/Header/CityHeader";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCurWeatherOneLocation } from "../../../Redux/actions/api/openweathermap/apiActions";
+import {
+  fetchCurWeatherOneLocation,
+  fetchForecastOneLocation,
+} from "../../../Redux/actions/api/openweathermap/apiActions";
 import {
   transformDate,
   transformFromDate,
@@ -11,25 +14,57 @@ import {
 } from "../../../helpers/DateHelper";
 import { camputeBreeze } from "../../../helpers/WeatherHelper";
 import Clocks from "../../Containers/Clocks/Clocks";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 
 class WeatherCity extends Component {
   static defaultProps = {};
 
   constructor(props) {
     super(props);
+    
   }
 
   componentDidMount() {
+    //Param from router
     let id = this.props.match.params.cityId;
-    let params = {
+
+    //Current location api
+    this.props.fetchCurWeatherOneLocation({
       id,
       units: "metric", //Celsium
-    };
-    this.props.fetchCurWeatherOneLocation(params);
-    console.log("mounted");
+    });
+
+    //Forecast one location api
+    this.props.fetchForecastOneLocation({
+      id,
+      units: "metric", //Celsium
+    });
+
+}
+
+  componentWillUnmount() {
+    console.log('unmaunt');
   }
 
-  componentWillUnmount() {}
+  composeTemperatureGraph(){
+    const res = this.props.forecastData.list.map((item) => {
+      return {
+        name: item.dt_txt,
+        t: item.main.temp,
+        min: item.main.temp_min,
+        max: item.main.temp_max,
+      }
+    });
+    // console.log(res);
+    return res;
+  }
 
   render() {
     // currentDate(3600)
@@ -37,6 +72,8 @@ class WeatherCity extends Component {
     // console.log("local of", new Date().getTimezoneOffset());
     // if(this.props.curCityDataIsLoaded)console.log(this.props.curCityData.coord.lat);
 
+    
+    
     return (
       <>
         <CityHeader
@@ -50,14 +87,21 @@ class WeatherCity extends Component {
 
         <section id="city-info">
           <div className="container">
-            {this.props.curCityDataIsLoaded ? (
-              <div className="row">
-                <div className="col-sm-12 text-centered header-wrap-padding">
-                  <h2 className="headline-3 orange-darken-4">
-                    Current weather and forecasts in{" "}
-                    {this.props.match.params.cityName}
-                  </h2>
-                </div>
+            <div className="row">
+              {/* heading */}
+              <div className="col-sm-12 text-centered header-wrap-padding">
+                <h2 className="headline-3 orange-darken-4">
+                  Current weather and forecasts in{" "}
+                  {this.props.match.params.cityName}
+                </h2>
+              </div>
+
+              {/* 
+                ----------------------------------------------
+                                left column 
+                ----------------------------------------------
+                */}
+              {this.props.curCityDataIsLoaded ? (
                 <div className="col-sm-4 simple-details">
                   <h3 className="ui header text-centered">
                     Weather in {this.props.curCityData.name},
@@ -160,16 +204,73 @@ class WeatherCity extends Component {
                     </table>
                   </div>
                 </div>
-                <div className="col-sm-8">
-                  <h3 className="ui header text-centered">
-                    Weather in {this.props.curCityData.name},
-                    {this.props.curCityData.sys.country}
-                  </h3>
+              ) : (
+                <div className="col-sm-4 simple-details">
+                  <p>Loading...</p>
                 </div>
+              )}
+
+              {/* 
+                  ---------------------------------------------    
+                                  right column 
+                  ---------------------------------------------    
+                */}
+              <div className="col-sm-8">
+                <h3 className="ui header text-centered">
+                  Weather in {this.props.match.params.cityName},
+                  {this.props.match.params.countryName}
+                </h3>
+                {this.props.forecastDataIsLoaded ? (
+                  <div className="graph-box">
+                    <AreaChart
+                      width={800}
+                      height={400}
+                      data={this.composeTemperatureGraph()}
+                      margin={{
+                        top: 10,
+                        right: 30,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="t"
+                        stroke="#8884d8"
+                        fill="#8884d8"
+                        isAnimationActive={true}
+                        // onAnimationEnd={console.log("end")}
+                        animationDuration={1500}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="min"
+                        stroke="red"
+                        fill="red"
+                        isAnimationActive={true}
+                        // onAnimationEnd={console.log("end")}
+                        animationDuration={1500}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="max"
+                        stroke="green"
+                        fill="green"
+                        isAnimationActive={true}
+                        // onAnimationEnd={console.log("end")}
+                        animationDuration={1500}
+                      />
+                    </AreaChart>
+                  </div>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
-            ) : (
-              <p>Loading...</p>
-            )}
+            </div>
           </div>
         </section>
       </>
@@ -186,14 +287,17 @@ const mapStateToProps = (state) => {
     curCityDataIsLoaded: state.apiCurWeatherOneCityReduser.isLoaded,
     curCityDataError: state.apiCurWeatherOneCityReduser.error,
 
-    //Defined props
-    // curCityName: state.apiCurWeatherOneCityReduser.data.name,
-    // curCityCountry: state.apiCurWeatherOneCityReduser.data.sys.country,
+    //Forecasts
+    forecastData: state.hendlerForecastOneLocationReduser.data,
+    forecastDataLoading: state.hendlerForecastOneLocationReduser.loading,
+    forecastDataIsLoaded: state.hendlerForecastOneLocationReduser.isLoaded,
+    forecastDataError: state.hendlerForecastOneLocationReduser.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurWeatherOneLocation: (q) => dispatch(fetchCurWeatherOneLocation(q)),
+  fetchForecastOneLocation: (q) => dispatch(fetchForecastOneLocation(q)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherCity);

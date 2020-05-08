@@ -8,7 +8,10 @@ import {
     FIND_CITIES_CUR_WEATHER_STARTED,
     FIND_CITIES_CUR_WEATHER_SUCCESS,
     FIND_CITIES_CUR_WEATHER_FAILURE,
-    FIND_CITIES_CUR_WEATHER_RESET
+    FIND_CITIES_CUR_WEATHER_RESET,
+    CALL_ONE_LOCATION_FORECAST_STARTED,
+    CALL_ONE_LOCATION_FORECAST_SUCCESS,
+    CALL_ONE_LOCATION_FORECAST_FAILURE,
     } from "../../types";
 
 // import axios from "axios";
@@ -216,3 +219,64 @@ const findCitiesCurWeatherSuccess = data => ({
 ////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////
+// Call forecast weather for one location
+///////////////////////////////////////////////
+/**
+ * Example request http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={your api key}'
+ * 
+ * @param {string} city name || city id || coords
+ * @return {Promise}
+ * @see https://openweathermap.org/forecast5#cityid5
+ */
+
+
+export const fetchForecastOneLocation = ( query ) => {
+  return (dispatch, getState) => {
+
+    if(!query) throw new Error('Query IS REQUIRED!');
+
+    const params = {
+      ...query,//merge object params
+      appid: openWeatherMapSecretKey,
+
+  };
+
+    dispatch(callOneLocationForecastStarted());
+
+    console.log('current state:', getState()); //debug
+
+    axiosInstance
+      .get('/data/2.5/forecast', {params: params})
+      .then((res) => {
+      // setTimeout(() => {
+        dispatch(callOneLocationForecastSuccess(res.data));
+      // }, 2500);
+      })
+      .catch((err) => {
+        dispatch(callOneLocationForecastFailure(err.message));
+      });
+  };
+};
+
+const callOneLocationForecastSuccess = data => ({
+    type: CALL_ONE_LOCATION_FORECAST_SUCCESS,
+    payload: {
+      ...data
+    }
+    // payload: data.data.children.map(child => child.data),
+  });
+  
+  const callOneLocationForecastStarted = () => ({
+    type: CALL_ONE_LOCATION_FORECAST_STARTED
+  });
+  
+  const callOneLocationForecastFailure = error => ({
+    type: CALL_ONE_LOCATION_FORECAST_FAILURE,
+    payload: {
+      error
+    }
+  });
+////////////////////////////////////////////////
+/// Call forecast weather for one location
+////////////////////////////////////////////////
